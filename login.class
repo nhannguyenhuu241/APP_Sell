@@ -1,0 +1,61 @@
+package com.example.nguyennhan.myapplication;
+
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.android.volley.RequestQueue;
+
+public class MainActivity extends AppCompatActivity {
+    Button btnlogin,btnregister,btnexit;
+    TextView username;
+    TextView password;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Anhxa();
+        ControlButtom();
+    }
+
+    private void GetData(String url) {
+        RequestQueue requestQueue=vo
+    }
+
+    private void ControlButtom() {
+        btnexit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this,android.R.style.Theme_DeviceDefault_Light_Dialog);
+                builder.setTitle("Are you sure exit the app!");
+                builder.setMessage("Select?");
+                builder.setIcon(android.R.drawable.ic_dialog_alert);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        onBackPressed();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.show();
+            }
+        });
+    }
+
+    private void Anhxa() {
+        username= (TextView)findViewById(R.id.lblUser);
+        password= (TextView)findViewById(R.id.lblPass);
+        btnlogin= (Button) findViewById(R.id.btnLogin);
+        btnregister= (Button) findViewById(R.id.btnResister);
+        btnexit= (Button) findViewById(R.id.btnexit);
+    }
+}
