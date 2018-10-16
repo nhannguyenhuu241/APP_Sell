@@ -1,0 +1,35 @@
+private void GetData()
+    {
+        RequestQueue requestQueue=Volley.newRequestQueue(this);
+        Map<String, String> map = new HashMap<>();
+        map.put("user","nhan");
+        map.put("password","2412");
+
+        JSONObject params = new JSONObject(map);
+
+        // Make request
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, urf, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //get json
+                try {
+                    String username = response.getString("ten");
+                    String sdt = response.getString("sdt");
+                    String diachi = response.getString("diachi");
+                    String quyen = response.getString("quyen");
+                    //String username = response.getString("ten");
+                    Toast.makeText(MainActivity.this,username+sdt+diachi+quyen,Toast.LENGTH_LONG).show();
+
+                }catch(JSONException ex){
+                    // show exception
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //get error json
+            }
+        });
+
+        requestQueue.add(jsonObjectRequest);
+    }
