@@ -1,0 +1,38 @@
+ private void getUser(){
+        //RequestQueue requestQueue=Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, urf, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                Toast.makeText(MainActivity.this,response.toString(),Toast.LENGTH_LONG).show();
+                //parse
+                try {
+                    JSONObject jsonObj = new JSONObject(response);
+                    String ten = jsonObj.getString("ten");
+                    String sdt = jsonObj.getString("sdt");
+                    String diachi = jsonObj.getString("diachi");
+                    String quyen = jsonObj.getString("quyen");
+                    Toast.makeText(MainActivity.this,ten +","+sdt+","+diachi+","+quyen,Toast.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this,error.toString(),Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String,String> hashMap = new HashMap<>();
+                hashMap.put("user","nhan");
+                hashMap.put("password","2412");
+                return hashMap;
+
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
